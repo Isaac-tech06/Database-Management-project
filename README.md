@@ -1,1 +1,5 @@
 # Database-Management-project
+
+## Description:
+This dataset holds large match data from every UEFA European Championship tournament from 1960 to 2024, including match results, scores, team information, and coaching staff. The data is provided as a collection of CSV files organized by tournament year, covering match-level details such as team matchups, scores, penalty results, and more across 52 columns per match file.
+We chose to work with this dataset because soccer is a sport we are all familiar with and interested in, making it easier to understand the data and write meaningful queries. The UEFA Euro Championship is one of the most prestigious international soccer tournaments, so the data is well-documented and reliable. The structure of the dataset maps naturally to a relational database — tournaments, teams, matches, scores, and coaches are all clearly distinct entities with real relationships between them. We scoped the project to the last 5 tournaments (2008–2024) to keep the data manageable while still having enough rows to demonstrate meaningful queries and aggregations.
