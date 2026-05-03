@@ -33,3 +33,30 @@ CREATE VIEW view_team_coaches AS
     SELECT teams.team_name, coaches.coach_name, coaches.coach_year 
     FROM teams 
     JOIN coaches ON teams.team_code = coaches.country_code;
+
+
+
+-------------------------------------------------
+-----RUN DURING PRESENTATION(database slide)-----
+-------------------------------------------------
+
+SELECT * FROM matches
+WHERE stage != 'GROUP_STANDINGS';
+
+SELECT * FROM coaches;
+
+-- Show table data
+SELECT * FROM teams LIMIT 10;
+SELECT * FROM tournaments;
+
+-- Show your JOIN query results
+SELECT * FROM matches m
+JOIN match_scores ms ON m.id_match = ms.id_match
+LIMIT 10;
+
+-- Show aggregate results
+SELECT m.tournament_year, COUNT(*) AS total_matches,
+SUM(ms.home_team_total + ms.away_team_total) AS total_goals
+FROM match_scores ms
+JOIN matches m ON ms.id_match = m.id_match
+GROUP BY m.tournament_year;
