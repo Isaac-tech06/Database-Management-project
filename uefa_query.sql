@@ -34,7 +34,17 @@ CREATE VIEW view_team_coaches AS
     FROM teams 
     JOIN coaches ON teams.team_code = coaches.country_code;
 
-
+CREATE VIEW view_performance AS
+SELECT 
+    t.team_name,
+    m.tournament_year,
+    COUNT(m.id_match) AS games_played,
+    SUM(CASE WHEN ms.match_winner = t.team_code THEN 1 ELSE 0 END) AS wins,
+    SUM(ms.home_team_total + ms.away_team_total) AS total_goals_in_matches
+FROM teams t
+JOIN matches m ON t.team_code IN (m.home_team_code, m.away_team_code)
+JOIN match_scores ms ON m.id_match = ms.id_match
+GROUP BY t.team_name, m.tournament_year;
 
 -------------------------------------------------
 -----RUN DURING PRESENTATION(database slide)-----
@@ -49,7 +59,7 @@ SELECT * FROM coaches;
 SELECT * FROM teams LIMIT 10;
 SELECT * FROM tournaments;
 
--- Show your JOIN query results
+-- Show JOIN query results
 SELECT * FROM matches m
 JOIN match_scores ms ON m.id_match = ms.id_match
 LIMIT 10;
@@ -60,3 +70,8 @@ SUM(ms.home_team_total + ms.away_team_total) AS total_goals
 FROM match_scores ms
 JOIN matches m ON ms.id_match = m.id_match
 GROUP BY m.tournament_year;
+
+-- Show View Performance results
+SELECT * FROM view_performance 
+ORDER BY wins DESC 
+LIMIT 5;
